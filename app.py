@@ -15,7 +15,7 @@ st.set_page_config(
 )
 
 # ---------------------------------------------------------
-# CUSTOM STYLING (GOLDEN YELLOW, SKY BLUE & WHITE GRADIENTS)
+# CUSTOM STYLING WITH MOBILE RESPONSIVE MEDIA QUERIES
 # ---------------------------------------------------------
 st.markdown("""
 <style>
@@ -27,16 +27,9 @@ st.markdown("""
 
     /* Sidebar Gradient (Sky Blue to Golden Yellow Accent) */
     [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #00B4DB 0%, #0083B0 35%, #F4C430 100%) !important;
+        background: linear-gradient(180deg, #00B4DB 0%, #0083B0 70%, #F4C430 100%) !important;
         border-right: None;
     }
-    /* Sidebar Header / Title Style */
-[data-testid="stSidebar"] h1 {
-    font-family: 'Arial', sans-serif !important; /* Font style change karein */
-    font-size: 22px !important;                 /* Font size change karein */
-    color: #FFFFFF !important;                  /* Font color change karein */
-    font-weight: bold !important;
-}
 
     /* Sidebar Text & Label Visibility */
     [data-testid="stSidebar"] label, 
@@ -50,6 +43,12 @@ st.markdown("""
         text-shadow: 0 1px 2px rgba(0,0,0,0.2);
     }
 
+    /* Customizing Sidebar Title */
+    [data-testid="stSidebar"] h1 {
+        font-size: 26px !important;
+        font-weight: bold !important;
+    }
+
     /* Form Inputs styling in Sidebar */
     .stTextInput input, .stNumberInput input, .stSelectbox > div {
         background-color: #FFFFFF !important;
@@ -59,59 +58,59 @@ st.markdown("""
         font-weight: 600 !important;
     }
 
-    /* Main Header Banner - Sky Blue to Golden Yellow Gradient */
+    /* Main Header Banner */
     .main-header {
-        background: linear-gradient(135deg, #0083B0 0%, #00B4DB 35%, #FFD700 100%);
-        padding: 30px;
+        background: linear-gradient(135deg, #0083B0 0%, #00B4DB 50%, #FFD700 100%);
+        padding: 25px;
         border-radius: 16px;
         box-shadow: 0 8px 25px rgba(0, 180, 219, 0.3);
-        margin-bottom: 30px;
+        margin-bottom: 25px;
         text-align: center;
     }
     .main-header h1 {
         color: #FFFFFF !important;
         font-weight: 900;
-        font-size: 2.5rem;
+        font-size: 2.3rem;
         margin: 0;
         letter-spacing: 0.5px;
         text-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
     .main-header p {
         color: #FFFDE7 !important;
-        font-size: 1.15rem;
+        font-size: 1.1rem;
         margin-top: 8px;
         margin-bottom: 0;
         font-weight: 600;
     }
 
-    /* Metric Cards Styling with Soft Golden Sky Gradient */
+    /* Metric Cards Styling */
     div[data-testid="metric-container"] {
         background: linear-gradient(135deg, #FFFFFF 0%, #E0F7FA 100%) !important;
         border: 2px solid #FFD700 !important;
-        padding: 20px !important;
+        padding: 16px !important;
         border-radius: 14px !important;
         box-shadow: 0 6px 18px rgba(0, 180, 219, 0.15) !important;
     }
     div[data-testid="metric-container"] label {
         color: #006064 !important;
-        font-size: 0.95rem !important;
+        font-size: 0.9rem !important;
         font-weight: 800 !important;
     }
     div[data-testid="metric-container"] [data-testid="stMetricValue"] {
         color: #0083B0 !important;
-        font-size: 2.1rem !important;
+        font-size: 1.8rem !important;
         font-weight: 900 !important;
     }
 
     /* Section Titles */
     .section-title {
         color: #006064;
-        font-size: 1.45rem;
+        font-size: 1.35rem;
         font-weight: 800;
-        margin-top: 30px;
-        margin-bottom: 20px;
+        margin-top: 25px;
+        margin-bottom: 15px;
         border-left: 6px solid #FFD700;
-        padding-left: 14px;
+        padding-left: 12px;
         background: linear-gradient(90deg, rgba(255, 215, 0, 0.15) 0%, rgba(255,255,255,0) 100%);
         border-radius: 4px;
     }
@@ -119,12 +118,12 @@ st.markdown("""
     /* Alert Title for Low Stock Section */
     .alert-title {
         color: #D32F2F;
-        font-size: 1.45rem;
+        font-size: 1.35rem;
         font-weight: 800;
-        margin-top: 30px;
-        margin-bottom: 20px;
+        margin-top: 25px;
+        margin-bottom: 15px;
         border-left: 6px solid #D32F2F;
-        padding-left: 14px;
+        padding-left: 12px;
         background: linear-gradient(90deg, rgba(211, 47, 47, 0.1) 0%, rgba(255,255,255,0) 100%);
         border-radius: 4px;
     }
@@ -141,38 +140,71 @@ st.markdown("""
         transition: all 0.3s ease;
         box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
     }
-    .stButton > button:hover {
-        background: linear-gradient(90deg, #FFC107 0%, #FF8F00 100%) !important;
-        transform: translateY(-2px);
-    }
 
     /* Developer Footer Details Banner */
     .footer-container {
         background: linear-gradient(135deg, #0083B0 0%, #00B4DB 50%, #FFD700 100%);
-        padding: 22px;
+        padding: 20px;
         border-radius: 12px;
         text-align: center;
         color: #FFFFFF;
-        margin-top: 40px;
+        margin-top: 35px;
         box-shadow: 0 6px 20px rgba(0, 131, 176, 0.25);
     }
     .footer-container h3 {
         margin: 0;
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         font-weight: 800;
         color: #FFFFFF !important;
     }
     .footer-container p {
         margin: 6px 0 0 0;
-        font-size: 1.05rem;
+        font-size: 1rem;
         font-weight: 600;
         color: #FFFDE7 !important;
+    }
+
+    /* --------------------------------------------------- */
+    /* MOBILE RESPONSIVE FIXES (SCREEN SIZE <= 768px)      */
+    /* --------------------------------------------------- */
+    @media only screen and (max-width: 768px) {
+        .block-container {
+            padding-left: 0.8rem !important;
+            padding-right: 0.8rem !important;
+            padding-top: 1rem !important;
+        }
+        .main-header {
+            padding: 18px !important;
+        }
+        .main-header h1 {
+            font-size: 1.5rem !important;
+        }
+        .main-header p {
+            font-size: 0.85rem !important;
+        }
+        .section-title, .alert-title {
+            font-size: 1.1rem !important;
+            padding-left: 8px !important;
+        }
+        div[data-testid="metric-container"] {
+            margin-bottom: 12px !important;
+            padding: 12px !important;
+        }
+        div[data-testid="metric-container"] [data-testid="stMetricValue"] {
+            font-size: 1.4rem !important;
+        }
+        .footer-container h3 {
+            font-size: 1rem !important;
+        }
+        .footer-container p {
+            font-size: 0.85rem !important;
+        }
     }
 </style>
 """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# SAMPLE DATA INITIALIZATION (1-BASED INDEX)
+# SAMPLE DATA INITIALIZATION
 # ---------------------------------------------------------
 @st.cache_data
 def load_initial_data():
@@ -285,7 +317,7 @@ col4.metric("Low Stock Alerts", f"{low_stock_count}", delta_color="inverse")
 st.markdown("---")
 
 # ---------------------------------------------------------
-# VISUAL ANALYTICS DASHBOARD (MATCHING THEME CHARTS)
+# VISUAL ANALYTICS DASHBOARD
 # ---------------------------------------------------------
 st.markdown('<div class="section-title">📈 Visual Analytics Dashboard</div>', unsafe_allow_html=True)
 
@@ -312,10 +344,11 @@ with chart_col1:
     fig1.update_layout(
         title="<b>Stock Levels vs. Reorder Threshold (Top 10)</b>",
         template=chart_theme,
+        autosize=True,
         paper_bgcolor='rgba(255,255,255,0.7)',
         plot_bgcolor='rgba(255,255,255,0.7)',
-        height=380,
-        margin=dict(l=20, r=20, t=50, b=50),
+        height=320,
+        margin=dict(l=10, r=10, t=40, b=40),
         font=dict(color="#004D40")
     )
     st.plotly_chart(fig1, use_container_width=True)
@@ -332,10 +365,11 @@ with chart_col2:
         template=chart_theme
     )
     fig2.update_layout(
+        autosize=True,
         paper_bgcolor='rgba(255,255,255,0.7)',
         plot_bgcolor='rgba(255,255,255,0.7)',
-        height=380,
-        margin=dict(l=20, r=20, t=50, b=50),
+        height=320,
+        margin=dict(l=10, r=10, t=40, b=40),
         font=dict(color="#004D40")
     )
     st.plotly_chart(fig2, use_container_width=True)
@@ -355,10 +389,11 @@ with chart_col3:
         color_discrete_sequence=color_sequence
     )
     fig3.update_layout(
+        autosize=True,
         paper_bgcolor='rgba(255,255,255,0.7)',
         plot_bgcolor='rgba(255,255,255,0.7)',
-        height=380,
-        margin=dict(l=20, r=20, t=50, b=50),
+        height=320,
+        margin=dict(l=10, r=10, t=40, b=40),
         font=dict(color="#004D40")
     )
     st.plotly_chart(fig3, use_container_width=True)
@@ -376,10 +411,11 @@ with chart_col4:
         template=chart_theme
     )
     fig4.update_layout(
+        autosize=True,
         paper_bgcolor='rgba(255,255,255,0.7)',
         plot_bgcolor='rgba(255,255,255,0.7)',
-        height=380,
-        margin=dict(l=20, r=20, t=50, b=50),
+        height=320,
+        margin=dict(l=10, r=10, t=40, b=40),
         coloraxis_showscale=False,
         font=dict(color="#004D40")
     )
@@ -416,7 +452,7 @@ else:
 st.markdown("---")
 
 # ---------------------------------------------------------
-# MASTER DATA RECORDS TABLE (1-BASED INDEX)
+# MASTER DATA RECORDS TABLE
 # ---------------------------------------------------------
 st.markdown('<div class="section-title">📋 Complete Inventory Master Records</div>', unsafe_allow_html=True)
 
