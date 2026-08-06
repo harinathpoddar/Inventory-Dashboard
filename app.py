@@ -3,6 +3,32 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
+import os
+
+# ---------------------------------------------------------
+# EXCEL / CSV BASED USER MANAGEMENT (Permanent Storage)
+# ---------------------------------------------------------
+USER_FILE = "users.csv"
+
+# Agar users.csv file nahi hai, to ek default file bana lo
+if not os.path.exists(USER_FILE):
+    df_users = pd.DataFrame({"username": ["admin"], "password": ["admin123"]})
+    df_users.to_csv(USER_FILE, index=False)
+
+def verify_user(username, password):
+    df_users = pd.read_csv(USER_FILE)
+    matched_user = df_users[(df_users['username'] == username) & (df_users['password'] == password)]
+    return not matched_user.empty
+
+def add_user(username, password):
+    df_users = pd.read_csv(USER_FILE)
+    if username in df_users['username'].values:
+        return False
+    
+    new_user = pd.DataFrame({"username": [username], "password": [password]})
+    df_users = pd.concat([df_users, new_user], ignore_index=False)
+    df_users.to_csv(USER_FILE, index=False)
+    return True
 
 # ---------------------------------------------------------
 # PAGE CONFIGURATION
@@ -173,11 +199,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# AUTHENTICATION & USER SYSTEM INITIALIZATION
+# SESSION STATE INITIALIZATION
 # ---------------------------------------------------------
-if 'users' not in st.session_state:
-    st.session_state.users = {"admin": "admin123"}  # Default admin user
-
 if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
 
@@ -226,7 +249,7 @@ if 'inventory_df' not in st.session_state:
     st.session_state.inventory_df = load_initial_data()
 
 # ---------------------------------------------------------
-# LOGIN & REGISTER VIEW (If user is not logged in)
+# LOGIN & REGISTER VIEW (Using Excel / CSV File)
 # ---------------------------------------------------------
 if not st.session_state.logged_in:
     st.markdown("""
@@ -245,7 +268,7 @@ if not st.session_state.logged_in:
             login_user = st.text_input("Username", key="l_user")
             login_pass = st.text_input("Password", type="password", key="l_pass")
             if st.button("Login"):
-                if login_user in st.session_state.users and st.session_state.users[login_user] == login_pass:
+                if verify_user(login_user, login_pass):
                     st.session_state.logged_in = True
                     st.session_state.user_name = login_user
                     st.success("Login Successful!")
@@ -259,15 +282,15 @@ if not st.session_state.logged_in:
             reg_pass = st.text_input("Choose Password", type="password", key="r_pass")
             reg_confirm = st.text_input("Confirm Password", type="password", key="r_conf")
             if st.button("Register"):
-                if reg_user in st.session_state.users:
-                    st.warning("Username already exists!")
-                elif reg_pass != reg_confirm:
+                if reg_pass != reg_confirm:
                     st.error("Passwords do not match.")
-                elif reg_user == "" or reg_pass == "":
+                elif reg_user.strip() == "" or reg_pass.strip() == "":
                     st.error("Please fill all fields.")
                 else:
-                    st.session_state.users[reg_user] = reg_pass
-                    st.success("Registration Successful! Please switch to Login tab.")
+                    if add_user(reg_user, reg_pass):
+                        st.success("Account created permanently in Excel/CSV! Please switch to Login tab.")
+                    else:
+                        st.warning("Username already exists!")
 
 # ---------------------------------------------------------
 # MAIN APPLICATION VIEW (If user is logged in)
