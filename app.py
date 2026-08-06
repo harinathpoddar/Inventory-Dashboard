@@ -73,6 +73,13 @@ st.markdown("""
         border-radius: 8px !important;
         font-weight: 600 !important;
     }
+    /* Sidebar Header / Title Style */
+[data-testid="stSidebar"] h1 {
+    font-family: 'Arial', sans-serif !important; /* Font style change karein */
+    font-size: 20px !important;                 /* Font size change karein */
+    color: #FFFFFF !important;                  /* Font color change karein */
+    font-weight: bold !important;
+}
 
     .main-header {
         background: linear-gradient(135deg, #0083B0 0%, #00B4DB 50%, #FFD700 100%);
